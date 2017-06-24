@@ -357,7 +357,7 @@
 						// Load image
 						scope._loadImg(imgObj).then(function(imgObj){
 							scope._activeImageIndex = scope.images.indexOf(imgObj);
-
+							
 							// Fire onImageOpen method only if gallery is opened and image really changed
 							if(scope.opened && scope._activeImg !== imgObj){
 								scope.onImageOpen({i: scope._activeImageIndex, img: imgObj});
@@ -434,7 +434,11 @@
 							imagesFirstWatch = false;
 						}
 						else if(scope.images.length){
-							scope._setActiveImg(scope.images[scope._activeImageIndex || 0]);
+							if(scope.opened){
+								scope._setActiveImg(scope.images[scope._activeImageIndex || 0]);
+							}else{
+								scope._setActiveImg(scope.images[scope._activeImageIndex || null]);
+							}
 						}
 					});
 
